@@ -33,11 +33,9 @@ have used for experiments, so you can simply install Microsoft Solver Foundation
     need are:
 
     1. `Mono.Options` (Command line argument parsing) 
-    2. `Math.Net Numerics` (Linear algebra)
-    3. `Math.Net Numerics MKL` 
-    4. `Math.Net Numerics OpenBlas`
+    2. `MathNet.Numerics` (Linear algebra, including MKL and OpenBlas)
 
-    Install all of them. For You can configure programmatically if you want MKL or OpenBlas. At the moment default active is MKL.
+    Install all of them to all projects in the solution. You can configure programmatically if you want MKL or OpenBlas. At the moment default active is MKL.
 
 3) Build the solution. The solution contains one library `NNAnalysis` with pretty much all of the functionality, and several executable projects. The ones that are most important for counterexample generation are `NNMNISTAccuracy` (targetting MNIST) and `NNCIFARAccuracy` (targetting CIFAR-10).
 
@@ -153,3 +151,7 @@ the .csv file.
 
 Fore more options check the help `--help` and browse the code! 
 
+Contributing
+============
+
+Please read [here](CONTRIBUTING.md)
