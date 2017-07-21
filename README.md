@@ -25,7 +25,7 @@ To build the analysis framework (Windows, VS 2015)
 ------------------------------------------------------
 
 1) You need to have Gurobi (an industrial linear solver) and its .NET bindings. Microsoft Solver Foundation does come with an old version of Gurobi with .NET bindings and this is the one that we 
-have used for experiments, so you can simply install Microsoft Solver Foundation, which is available through an `.msi` installer. Alternatively it is extremely easy to change the solver but you need to modify the code. 
+have used for experiments, so you can simply install Microsoft Solver Foundation, available [here](https://msdn.microsoft.com/en-us/devlabs/hh145003). Alternatively, it is extremely easy to change the solver but you need to do some actual hacking. 
 
 2) Open the solution `src/NNAnalysis/NNAnalysis.sln` 
 
@@ -46,9 +46,9 @@ It should be possible to build under Mono in Linux or Mac but we have not tried.
 How to *actually* run stuff? 
 ============================
 
-Let's work by example of CIFAR.
+Let's work with the example of CIFAR-10.
 
-Step 1: Make sure you have the dataset and a trained caffe model
+Step 1: Make sure you have the dataset and a trained Caffe model
 -----------------------------------------------------------------
 
 For CIFAR-10 there's one data set fo testing (`test_batch.bin`) and 5 data batches
@@ -56,7 +56,7 @@ for training. In a caffe installation the are somewhere like `caffe/data/cifar10
 Then follow standard Caffe instructions and train your model to produce a `.caffemodel` 
 file. NB: Make sure that your Caffe model encoding is with protocol buffers. 
 
-Step 2: Convert your model to a format we like. 
+Step 2: Convert your model to a format we like
 -----------------------------------------------
 Run the utility in `protobuf/` according to the README there on your caffe model
 file to produce a binary file that our tool can process. Let's call the new file 
@@ -66,10 +66,13 @@ Our tool can process a lot of standard CNN layers but don't try anything too cra
 with the caffe model (like a cross-layer residual architecture). We've only implemented 
 straight layer-by-layer functionality.
 
-Step 3: Find adversarial examples!
+In the future we'd like to directly accept protocol buffer descriptions of caffe models,
+but for the moment it's an extra step you have to perform.
+
+Step 3: Find adversarial examples
 ----------------------------------
 
-You are good to go.
+You are good to try and find adversarial examples.
 
 1) Go to the directory where `NNCIFARAccuracy.exe` lives. For instance
    if you compile a Release executable for AnyCPU, that would be something like:
@@ -94,7 +97,7 @@ There are a whole lot of option on our tools -- for example if you _only_ want t
 .\NNCIFARAccuracy.exe --nnet cifar10.mldiffmodel --dataset .\test_batch.bin --only-accuracy
 ```
 Hopefully you will get a number very close or exactly the same to what
-Caffe gave you when you trained the network. If not, there's most
+Caffe gave you when you tested the network. If not, there's most
 likely a bug in one of our layers or check in your Caffe model prototxt 
 that you are not using the following (currently unsupported) features:
 1. Convolutions with stride != 1 
