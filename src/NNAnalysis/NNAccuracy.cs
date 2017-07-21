@@ -124,10 +124,7 @@ namespace NNAnalysis
                     lock (lockObject)
                     {
                         Console.Write("\r{0:0.000}%, Accuracy:{1:0.000}%", (double)prg * 100.0 / ds.Count(), (double)cnt * 100.0 / prg);
-
-                        //int[] foobar = Utils.UArray.ToRGBArray(datum, 1.0, 0.0);
-                        //Utils.UDraw.DisplayImageAndPause(foobar, 32, 32, true);
-
+                        // Utils.UDraw.DisplayImageAndPause(Utils.UArray.ToRGBArray(datum, 1.0, 0.0), 32, 32, true);
                     }
 
                 };
